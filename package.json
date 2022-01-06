@@ -1,0 +1,20 @@
+{
+  "name": "elpri",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parse": "^5.0.4",
+    "csv-parser": "^3.0.0",
+    "moment": "^2.29.1",
+    "momentjs": "^2.0.0",
+    "unirest": "^0.6.0"
+  }
+}
