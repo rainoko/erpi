@@ -14,7 +14,6 @@ fs.createReadStream('tarbimine.csv')
         csvData.push(csvrow);
     })
     .on('end', function () {
-        //do something with csvData
         console.log(csvData);
         unirest
             .get('https://dashboard.elering.ee/api/nps/price')
