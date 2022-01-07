@@ -19,7 +19,7 @@ fs.createReadStream('tarbimine.csv')
         unirest
             .get('https://dashboard.elering.ee/api/nps/price')
             .query({
-                start: moment("2021-11-01T00:00:00Z").format(),
+                start: moment("2021-10-01T00:00:00Z").format(),
                 end: moment("2022-01-02T00:00:00Z").format()
             })
             .end(function (response) {
@@ -27,15 +27,19 @@ fs.createReadStream('tarbimine.csv')
                 console.log(response.body)
                 response.body.data['ee'].forEach((data) => {
                     ee[moment.unix(data.timestamp).utc().format()] = data.price;
-                    console.log(ee);
                 })
                 var total = 0;
+                var totalKwh = 0;
                 csvData.forEach((consumption) => {
-                    consumption.price = consumption.kwh * ee[consumption.utc].price
-                    total = total + consumption.price
+                    console.log(ee[consumption.utc]);
+                    let kwh = Number(consumption.kwh);
+                    consumption.price = (kwh * Number(Number(ee[consumption.utc]/1000).toFixed(2)));
+                    total = total + consumption.price;
+                    totalKwh += kwh;
                 });
                 console.log(csvData);
                 console.log(total);
+                console.log(totalKwh);
 
             });
     });
